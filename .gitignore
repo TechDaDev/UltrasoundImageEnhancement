@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+runs_hybrid_paired/
+denoise/
+normal/
+.gemini/
+data/
+*.h5
+*.pth
+*.pt
+*.keras
+test_results/
+scripts/hybrid_results/
+scripts/esrgan_hybrid_model/
