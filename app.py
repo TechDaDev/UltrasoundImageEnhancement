@@ -614,26 +614,23 @@ st.markdown("""
         background: var(--primary-gradient) !important;
     }
     
-    /* Expander styling - Fixed */
+    /* Expander styling - Fixed Visibility and Artifacts */
     [data-testid="stExpander"] {
         background: rgba(255, 255, 255, 0.02) !important;
         border-radius: 12px !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        overflow: hidden;
-    }
-    
-    [data-testid="stExpander"] summary {
-        padding: 1rem !important;
-        font-weight: 600 !important;
-        color: rgba(255, 255, 255, 0.9) !important;
-    }
-    
-    [data-testid="stExpander"] summary:hover {
-        background: rgba(102, 126, 234, 0.1) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin-bottom: 1rem !important;
     }
     
     [data-testid="stExpander"] [data-testid="stExpanderDetails"] {
-        padding: 0 1rem 1rem 1rem !important;
+        padding: 1rem !important;
+        background: transparent !important;
+    }
+
+    /* Target the label to improve visibility without breaking the icon */
+    [data-testid="stExpander"] summary p {
+        font-weight: 600 !important;
+        color: rgba(255, 255, 255, 0.95) !important;
     }
     
     /* Sidebar info box */
@@ -1511,9 +1508,9 @@ def main():
                 st.markdown("""
                     <div class='info-box' style='border-left: 4px solid #00d4ff;'>
                         <h3 style='margin-top: 0; color: #00d4ff; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;'>
-                            <span>�</span> Deep Dive into Metrics
+                            <span>🔬</span> Deep Dive into Metrics
                         </h3>
-                        <p style='color: rgba(255,255,255,0.8); line-height: 1.6;'>
+                        <p style='color: rgba(255,255,255,0.9); line-height: 1.6;'>
                             To ensure medical accuracy, we use two industry-standard mathematical models to compare the AI results against the original and reference images.
                         </p>
                     </div>
@@ -1523,21 +1520,21 @@ def main():
                 
                 with exp_col1:
                     st.markdown("""
-                        <div style='background: rgba(102, 126, 234, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.2); height: 100%;'>
-                            <h4 style='color: #667eea; margin-top: 0;'>📊 PSNR</h4>
-                            <p style='font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;'>
+                        <div style='background: rgba(102, 126, 234, 0.08); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(102, 126, 234, 0.3); height: 100%;'>
+                            <h4 style='color: #667eea; margin-top: 0; font-size: 1.25rem;'>📊 PSNR</h4>
+                            <p style='font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem; line-height: 1.5;'>
                                 <strong>Peak Signal-to-Noise Ratio</strong> measures the ratio between the maximum possible power of a signal and the power of corrupting noise.
                             </p>
-                            <div style='background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;'>
-                                <div style='font-size: 0.85rem; margin-bottom: 0.5rem;'><strong>What to look for:</strong></div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
-                                    <span style='color: #10b981;'>●</span> <strong>30+ dB</strong>: High Quality
+                            <div style='background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);'>
+                                <div style='font-size: 0.9rem; margin-bottom: 0.75rem; color: white;'><strong>What to look for:</strong></div>
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #10b981; font-size: 1.1rem;'>●</span> <strong>30+ dB</strong>: High Quality
                                 </div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
-                                    <span style='color: #f59e0b;'>●</span> <strong>20-30 dB</strong>: Acceptable
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #f59e0b; font-size: 1.1rem;'>●</span> <strong>20-30 dB</strong>: Acceptable
                                 </div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px;'>
-                                    <span style='color: #ef4444;'>●</span> <strong><20 dB</strong>: Significant Noise
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #ef4444; font-size: 1.1rem;'>●</span> <strong><20 dB</strong>: Significant Noise
                                 </div>
                             </div>
                         </div>
@@ -1545,21 +1542,21 @@ def main():
                 
                 with exp_col2:
                     st.markdown("""
-                        <div style='background: rgba(118, 75, 162, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(118, 75, 162, 0.2); height: 100%;'>
-                            <h4 style='color: #b24bf3; margin-top: 0;'>🔍 SSIM</h4>
-                            <p style='font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;'>
+                        <div style='background: rgba(118, 75, 162, 0.08); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(118, 75, 162, 0.3); height: 100%;'>
+                            <h4 style='color: #b24bf3; margin-top: 0; font-size: 1.25rem;'>🔍 SSIM</h4>
+                            <p style='font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 1.2rem; line-height: 1.5;'>
                                 <strong>Structural Similarity Index</strong> is a perceptual metric that quantifies image quality degradation caused by processing.
                             </p>
-                            <div style='background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;'>
-                                <div style='font-size: 0.85rem; margin-bottom: 0.5rem;'><strong>What to look for:</strong></div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
-                                    <span style='color: #10b981;'>●</span> <strong>0.95 - 1.0</strong>: Perfect Preservation
+                            <div style='background: rgba(0,0,0,0.4); padding: 1.25rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);'>
+                                <div style='font-size: 0.9rem; margin-bottom: 0.75rem; color: white;'><strong>What to look for:</strong></div>
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #10b981; font-size: 1.1rem;'>●</span> <strong>0.95 - 1.0</strong>: Perfect Preservation
                                 </div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
-                                    <span style='color: #f59e0b;'>●</span> <strong>0.80 - 0.95</strong>: Minor Changes
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; margin-bottom: 8px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #f59e0b; font-size: 1.1rem;'>●</span> <strong>0.80 - 0.95</strong>: Minor Changes
                                 </div>
-                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px;'>
-                                    <span style='color: #ef4444;'>●</span> <strong><0.80</strong>: Structural Distortion
+                                <div style='font-size: 0.85rem; display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.95);'>
+                                    <span style='color: #ef4444; font-size: 1.1rem;'>●</span> <strong><0.80</strong>: Structural Distortion
                                 </div>
                             </div>
                         </div>
