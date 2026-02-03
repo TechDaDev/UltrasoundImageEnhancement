@@ -1021,6 +1021,25 @@ def main():
                 </ol>
             </div>
         """, unsafe_allow_html=True)
+
+        # Quality Metrics Guide Section (New)
+        st.markdown("""
+            <div class='sidebar-section'>
+                <div class='sidebar-title'>📈 Metrics Reference</div>
+                <div class='sidebar-content'>
+                    <div style='margin-bottom: 0.8rem;'>
+                        <strong style='color: #667eea;'>PSNR</strong> (Quality)
+                        <br>
+                        Higher dB means less noise and better fidelity to the clean reference.
+                    </div>
+                    <div>
+                        <strong style='color: #b24bf3;'>SSIM</strong> (Structure)
+                        <br>
+                        Shows how well the AI preserved the anatomical shapes and textures.
+                    </div>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
     
     # Load models
     enhancer = load_models()
@@ -1489,37 +1508,77 @@ def main():
                 # Detailed Metrics Explanation
                 st.markdown("<br>", unsafe_allow_html=True)
                 
-                with st.expander("📖 Understanding Quality Metrics", expanded=False):
-                    st.markdown("""
-                    <div style='background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px;'>
-                        <h4 style='color: #667eea; margin-top: 0;'>📊 PSNR (Peak Signal-to-Noise Ratio)</h4>
-                        <ul style='color: rgba(255,255,255,0.7); line-height: 1.8;'>
-                            <li><strong>Measures:</strong> Image quality in decibels (dB)</li>
-                            <li><strong>Interpretation:</strong> Higher values = better quality</li>
-                            <li><strong style='color: #10b981;'>Excellent:</strong> 40+ dB</li>
-                            <li><strong style='color: #10b981;'>Good:</strong> 30-40 dB</li>
-                            <li><strong style='color: #f59e0b;'>Fair:</strong> 20-30 dB</li>
-                            <li><strong style='color: #ef4444;'>Poor:</strong> <20 dB</li>
-                        </ul>
-                        
-                        <h4 style='color: #b24bf3; margin-top: 1.5rem;'>🔍 SSIM (Structural Similarity Index)</h4>
-                        <ul style='color: rgba(255,255,255,0.7); line-height: 1.8;'>
-                            <li><strong>Measures:</strong> Structural similarity (0 to 1)</li>
-                            <li><strong>Interpretation:</strong> Closer to 1 = better structural preservation</li>
-                            <li><strong style='color: #10b981;'>Excellent:</strong> 0.95-1.0 (near-perfect preservation)</li>
-                            <li><strong style='color: #10b981;'>Good:</strong> 0.90-0.95 (high quality)</li>
-                            <li><strong style='color: #f59e0b;'>Fair:</strong> 0.70-0.90 (acceptable)</li>
-                            <li><strong style='color: #ef4444;'>Poor:</strong> <0.70 (significant degradation)</li>
-                        </ul>
-                        
-                        <h4 style='color: #00d4ff; margin-top: 1.5rem;'>💡 Why Both Metrics Matter</h4>
-                        <p style='color: rgba(255,255,255,0.7); line-height: 1.8;'>
-                            <strong>PSNR</strong> measures pixel-level accuracy, while <strong>SSIM</strong> evaluates perceptual quality. 
-                            An image can have high PSNR but low SSIM (or vice versa). For medical imaging, both metrics 
-                            are important: PSNR ensures fidelity, while SSIM confirms that critical structures are preserved.
+                st.markdown("""
+                    <div class='info-box' style='border-left: 4px solid #00d4ff;'>
+                        <h3 style='margin-top: 0; color: #00d4ff; font-size: 1.3rem; display: flex; align-items: center; gap: 0.5rem;'>
+                            <span>�</span> Deep Dive into Metrics
+                        </h3>
+                        <p style='color: rgba(255,255,255,0.8); line-height: 1.6;'>
+                            To ensure medical accuracy, we use two industry-standard mathematical models to compare the AI results against the original and reference images.
                         </p>
                     </div>
-                    """)
+                """, unsafe_allow_html=True)
+
+                exp_col1, exp_col2 = st.columns(2)
+                
+                with exp_col1:
+                    st.markdown("""
+                        <div style='background: rgba(102, 126, 234, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(102, 126, 234, 0.2); height: 100%;'>
+                            <h4 style='color: #667eea; margin-top: 0;'>📊 PSNR</h4>
+                            <p style='font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;'>
+                                <strong>Peak Signal-to-Noise Ratio</strong> measures the ratio between the maximum possible power of a signal and the power of corrupting noise.
+                            </p>
+                            <div style='background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;'>
+                                <div style='font-size: 0.85rem; margin-bottom: 0.5rem;'><strong>What to look for:</strong></div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
+                                    <span style='color: #10b981;'>●</span> <strong>30+ dB</strong>: High Quality
+                                </div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
+                                    <span style='color: #f59e0b;'>●</span> <strong>20-30 dB</strong>: Acceptable
+                                </div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px;'>
+                                    <span style='color: #ef4444;'>●</span> <strong><20 dB</strong>: Significant Noise
+                                </div>
+                            </div>
+                        </div>
+                    """, unsafe_allow_html=True)
+                
+                with exp_col2:
+                    st.markdown("""
+                        <div style='background: rgba(118, 75, 162, 0.05); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(118, 75, 162, 0.2); height: 100%;'>
+                            <h4 style='color: #b24bf3; margin-top: 0;'>🔍 SSIM</h4>
+                            <p style='font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 1rem;'>
+                                <strong>Structural Similarity Index</strong> is a perceptual metric that quantifies image quality degradation caused by processing.
+                            </p>
+                            <div style='background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;'>
+                                <div style='font-size: 0.85rem; margin-bottom: 0.5rem;'><strong>What to look for:</strong></div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
+                                    <span style='color: #10b981;'>●</span> <strong>0.95 - 1.0</strong>: Perfect Preservation
+                                </div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px; margin-bottom: 5px;'>
+                                    <span style='color: #f59e0b;'>●</span> <strong>0.80 - 0.95</strong>: Minor Changes
+                                </div>
+                                <div style='font-size: 0.8rem; display: flex; align-items: center; gap: 10px;'>
+                                    <span style='color: #ef4444;'>●</span> <strong><0.80</strong>: Structural Distortion
+                                </div>
+                            </div>
+                        </div>
+                    """, unsafe_allow_html=True)
+                
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+                with st.expander("📝 Implementation Details", expanded=False):
+                    st.markdown("""
+                    <div style='background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 12px;'>
+                        <p style='font-size: 0.9rem; color: rgba(255,255,255,0.7);'>
+                            The metrics are calculated in real-time using NumPy by comparing the <strong>Normalized Greayscale Intensity</strong> of each pixel. 
+                            The original noisy image is used as the baseline.
+                        </p>
+                        <code style='color: #00d4ff; font-size: 0.85rem;'>PSNR = 20 * log10(MAX / sqrt(MSE))</code>
+                        <br>
+                        <code style='color: #b24bf3; font-size: 0.85rem;'>SSIM = luminance * contrast * structure</code>
+                    </div>
+                    """, unsafe_allow_html=True)
 
             with tab5:
                 st.markdown("### 🎨 Interactive Post-Processing")
